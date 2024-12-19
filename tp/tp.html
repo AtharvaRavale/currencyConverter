@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Prank Button</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    .prank-button {
+      padding: 20px 50px;
+      background-color: #ff1744;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 30px rgba(255, 23, 68, 0.8);
+    }
+
+    .prank-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255, 23, 68, 1);
+    }
+
+    .emoji-letter {
+      position: absolute;
+      font-size: 64px; /* Bigger letters */
+      font-weight: bold;
+      animation: fly 5s ease-out forwards; /* Slower animation */
+      opacity: 0;
+    }
+
+    /* Fly animation for the letters */
+    @keyframes fly {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="prank-button" onclick="splashText()">Click Me 😈</button>
+
+  <script>
+    function splashText() {
+      const letters = ['F', 'U', 'C', 'K', 'Y', 'O', 'U', ' 🖕']; // Combined letters with middle finger emoji
+      const colors = ['#ff1744', '#ff9100', '#ffea00', '#00e676', '#2979ff', '#d500f9']; // Color palette
+      const fragment = document.createDocumentFragment(); // Improve performance
+
+      for (let i = 0; i < 50; i++) { // Create 50 splashes
+        const letter = document.createElement('div');
+        letter.classList.add('emoji-letter');
+        letter.textContent = letters[Math.floor(Math.random() * letters.length)];
+
+        // Apply random color to each letter
+        letter.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+        // Randomize the direction of each letter
+        const x = (Math.random() - 0.5) * window.innerWidth * 1.5;
+        const y = (Math.random() - 0.5) * window.innerHeight * 1.5;
+
+        letter.style.setProperty('--x', `${x}px`);
+        letter.style.setProperty('--y', `${y}px`);
+
+        // Random initial position within the viewport
+        letter.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        letter.style.top = `${Math.random() * 100}vh`;  // Random vertical position
+
+        fragment.appendChild(letter);
+
+        // Remove the letter after 5 seconds (to match the animation duration)
+        setTimeout(() => letter.remove(), 5000);
+      }
+
+      document.body.appendChild(fragment);
+    }
+  </script>
+</body>
+</html>

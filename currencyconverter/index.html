@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+<datalist id="currency">
+    <option value="INR">Bharat</option>
+    <option value="USD">US</option>
+    <option value="EUR">Europian</option>
+    <option value="AED">Dubai</option>
+
+
+</datalist>
+<form action="">
+    <label for="from">
+        From
+    </label>
+    <input list="currency" id="from" >
+    <label for="to">To</label>
+    <input list="currency" id="to">
+
+
+    <label for="amount">Amount</label>
+    <input type="number" name="" id="amount" min="1" step="0.1" >
+
+    <button type="button" onclick="convert()">Convert</button>
+
+</form>
+
+
+<script src="main.js">
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
